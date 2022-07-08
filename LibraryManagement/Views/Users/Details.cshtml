@@ -1,0 +1,60 @@
+﻿@model LibraryManagement.Models.User
+
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h3>Details of user</h3>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+    </dl>
+</div>
+
+<h3>History</h3>
+<table class="table col-3">
+    <thead>
+        <th>Book</th>
+        <th>Loaned on</th>
+        <th>Returned on</th>
+    </thead>
+    @foreach(var bookhistory in Model.BookHistories.OrderBy(b => b.ReturnedAt != null).ThenByDescending(b => b.LoanedAt))
+    {
+        <tr>
+            <td>@bookhistory.Book.Title</td>
+            <td>@bookhistory.LoanedAt.ToString("dd-MM-yyyy")</td>
+            @if (Convert.ToDateTime(bookhistory.ReturnedAt) != DateTime.MinValue)
+            {
+                <td>@Convert.ToDateTime(bookhistory.ReturnedAt).ToString("dd-MM-yyyy")</td>
+            }
+            else
+            {
+                <td>-</td>
+            }
+        </tr>
+    }
+</table>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to Users</a>
+</div>

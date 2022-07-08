@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h3>Books</h3>
+<div class="row">
+    @foreach (var book in Model) {
+
+        <div class="card col-3">
+            <div class="card-header">
+                <h5>@book.Title</h5>
+            </div>
+            <div class="card-body">
+                <div style="width:140px; height:140px;border:1px solid black">
+                    <p>Here will come the image.</p>
+                    <p>@book.CoverImage</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p>by @book.Author.FirstName @book.Author.LastName</p>
+                <p>@book.Genre.Name</p>
+            </div>
+        </div>
+    }
+</div>
