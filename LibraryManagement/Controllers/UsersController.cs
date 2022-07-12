@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LibraryManagement;
 using LibraryManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagement.Controllers
 {
+    [Route("/users/{action=Index}/{id?}")]
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -38,6 +41,7 @@ namespace LibraryManagement.Controllers
             }
 
             var user = await _context.Users
+                //.Where(u => u.Role == UserRole.Customer)
                 .Include(u => u.BookHistories)
                 .ThenInclude(b => b.Book)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -61,10 +65,11 @@ namespace LibraryManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName")] User user)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,Email")] User user)
         {
             user.Id = Guid.NewGuid();
             user.Role = UserRole.Customer;
+            user.Password = "Password123!";
 
             // Don't want any errors on bookhistories.
             //ModelState.Remove("BookHistories");
@@ -100,7 +105,7 @@ namespace LibraryManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,FirstName,LastName,Role")] User user)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,FirstName,LastName,Role,Email,Password")] User user)
         {
             if (id != user.Id)
             {

@@ -13,6 +13,167 @@ html {
   min-height: 100%;
 }
 
+.bg-orange {
+    background-color: orange;
+    color: white;
+}
+
 body {
   margin-bottom: 60px;
+}
+
+.account-nav-link {
+    float: right;
+    position: absolute;
+}
+
+.account-nav-link {
+    right: 30px;
+}
+
+.login-form {
+    outline: 3px solid orange;
+    border: 3px solid white;
+    background-color: orange;
+    border-radius: 10px;
+    padding: 8px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-form-field {
+    margin-bottom: 20px;
+}
+
+.login-form-field label {
+    text-align: center;
+    font-size: 12px;
+    font-family: Verdana;
+}
+
+.login-form-field input {
+    border: 0;
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 3px;
+    padding:5px;
+}
+
+.login-form-field span {
+    text-align: center;
+}
+
+.login-form-field * {
+    display: block;
+}
+
+.login-form input[type=submit] {
+    display: block;
+    margin: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0;
+    background-color: orange;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    padding: 8px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.book {
+    max-width: 230px;
+    border: 2px solid orange;
+    border-radius: 40px;
+    padding: 1px;
+    margin-right: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.book-deck {
+    display: flex;
+}
+
+.book-header {
+    width: 100%;
+    border-bottom: 2px solid orange;
+    background-color: orange;
+    color: white;
+    border-radius: 40px 40px 0 0;
+    text-align: center;
+    padding: 8px;
+}
+
+.book-body {
+
+}
+
+.book-body-image {
+    text-align: center;
+    outline: 2px solid white;
+}
+
+.book-body-image img {
+    height: 350px;
+}
+
+.book-footer {
+    width: 100%;
+    border-bottom: 2px solid orange;
+    background-color: orange;
+    color: white;
+    border-radius: 0 0 40px 40px;
+    text-align: center;
+    padding: 8px;
+
+}
+.book-details {
+    display: inline-block;
+}
+
+.book-details-table {
+    border: 2px solid orange;
+    vertical-align: top;
+}
+
+.book-details-table tr {
+    line-height: 4px;
+}
+
+.book-details-table th, 
+.book-details-table td {
+    padding: 15px;
+}
+
+.book-details-table tr:nth-child(even){
+    background-color: orange;
+    color: white;
+}
+.book-details-table tr:nth-child(odd) {
+    background-color: white;
+    color: orange;
+}
+
+.userrole-select {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    border: 2px solid orange;
+    background-color: orange;
+    color: white;
+    padding: 8px;
+    padding-bottom: 0px;
+    border-radius: 10px 0 0 0;
+}
+
+.userrole-select * {
+    display: inline-block;
+}
+
+.userrole-select select {
+    border: 0;
+    border-radius: 3px;
 }

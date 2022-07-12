@@ -13,6 +13,7 @@ namespace LibraryManagement.Models
         [Required]
         public string Title { get; set; }
 
+        [StringLength(int.MaxValue)]
         public string? Description { get; set; }
 
         public string? CoverImage { get; set; }

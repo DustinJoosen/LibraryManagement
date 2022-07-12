@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LibraryManagement;
 using LibraryManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagement.Controllers
 {
+    [Route("/books/{action=Index}/{id?}")]
+    [Authorize(Roles = "Admin")]
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -1,0 +1,61 @@
+﻿@model Book
+
+<h3 style="text-align: center;">@Model.Title</h3>
+
+<div class="row">
+    <div style="border:2px solid orange" class="col-4">
+        <h3>Book History</h3>
+        <table>
+            <tr>
+                <th>Loaned to</th>
+                <th>Loaned on</th>
+                <th>Returned at</th>
+            </tr>
+            @foreach(var bookHistory in Model.BookHistories)
+            {
+                <tr>
+                    <td>@bookHistory.User.FirstName @bookHistory.User.LastName</td>
+                    <td title="@bookHistory.LoanedAt">@bookHistory.LoanedAt.ToString("dd-MM-yyyy")</td>
+                    <td>@Convert.ToDateTime(bookHistory.ReturnedAt).ToString("dd-MM-yyyy")</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <img src="img/books/@Model.CoverImage" style="" class="col-3" />
+        <div class="book-details col-4">
+        <table class="book-details-table">
+            <tr>
+                <th>Title</th>
+                <td>@Model.Title</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td>@Model.Author.FirstName @Model.Author.LastName</td>
+            </tr>
+            <tr>
+                <th>Genre</th>
+                <td>@Model.Genre.Name</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>@Model.Language</td>
+            </tr>
+            <tr>
+                <th>Pages</th>
+                <td>@Model.Pages</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>@Model.Description</td>
+            </tr>
+            <tr>
+                <th>Available</th>
+                <td>@(ViewBag.Available ? "Yes" : "No")</td>
+            </tr>
+        </table>
+        @if (ViewBag.Available)
+        {
+            <a asp-action="Loan" asp-route-id="@Model.Id" class="btn btn-primary">Loan to customer</a>
+        }
+    </div>
+</div>

@@ -3,23 +3,23 @@
     ViewData["Title"] = "Home";
 }
 
-<h3>Books</h3>
-<div class="row">
+<div class="book-deck">
     @foreach (var book in Model) {
 
-        <div class="card col-3">
-            <div class="card-header">
+        <div class="col-3 book" value="@book.Id">
+            <div class="book-header">
                 <h5>@book.Title</h5>
             </div>
-            <div class="card-body">
-                <div style="width:140px; height:140px;border:1px solid black">
-                    <p>Here will come the image.</p>
-                    <p>@book.CoverImage</p>
+            <div class="book-body">
+                <div class="book-body-image">
+                    <img src="img/books/@book.CoverImage" alt="@book.Title" />
                 </div>
             </div>
-            <div class="card-footer">
-                <p>by @book.Author.FirstName @book.Author.LastName</p>
-                <p>@book.Genre.Name</p>
+            <div class="book-footer">
+                <p>
+                    By @book.Author.FirstName @book.Author.LastName<br/>
+                    @book.Genre.Name
+                </p>
             </div>
         </div>
     }

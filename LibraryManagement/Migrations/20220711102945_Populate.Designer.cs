@@ -4,6 +4,7 @@ using LibraryManagement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220711102945_Populate")]
+    partial class Populate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,25 +47,25 @@ namespace LibraryManagement.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0de522e3-5351-4354-83ec-7b3014d0b894"),
+                            Id = new Guid("69c7fb18-f99d-4f2d-b015-62c91120c31c"),
                             FirstName = "Andy",
                             LastName = "Weir"
                         },
                         new
                         {
-                            Id = new Guid("6eaf531e-fec3-4c49-bd8d-10fce929277b"),
+                            Id = new Guid("4b405a5b-9652-4213-8068-85639e99cfe1"),
                             FirstName = "Suzanne",
                             LastName = "Collins"
                         },
                         new
                         {
-                            Id = new Guid("11ed2a48-3a3e-4c21-9195-1047a29a007b"),
+                            Id = new Guid("d35450ed-c943-48c5-88ed-ab8a9f5eb064"),
                             FirstName = "Joanne",
                             LastName = "Rowling"
                         },
                         new
                         {
-                            Id = new Guid("f94425bb-0f50-4100-8dea-e600f1240b20"),
+                            Id = new Guid("e29fcc24-13ad-4fb0-a782-6edd85f2fa3e"),
                             FirstName = "Cassandra",
                             LastName = "Clare"
                         });
@@ -107,6 +109,64 @@ namespace LibraryManagement.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("Books");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3c4657cd-955d-44ca-bfd4-833411f32be0"),
+                            AuthorId = new Guid("69c7fb18-f99d-4f2d-b015-62c91120c31c"),
+                            GenreId = new Guid("45dfbab4-60df-4037-ba97-2f6088719cca"),
+                            Pages = 369,
+                            Title = "The martian"
+                        },
+                        new
+                        {
+                            Id = new Guid("74fdbfa6-4196-4804-9d10-840f41031781"),
+                            AuthorId = new Guid("69c7fb18-f99d-4f2d-b015-62c91120c31c"),
+                            GenreId = new Guid("45dfbab4-60df-4037-ba97-2f6088719cca"),
+                            Pages = 496,
+                            Title = "Project Hail Mary"
+                        },
+                        new
+                        {
+                            Id = new Guid("112e8576-01a6-4105-af3e-f3ef5453b638"),
+                            AuthorId = new Guid("4b405a5b-9652-4213-8068-85639e99cfe1"),
+                            GenreId = new Guid("93c5439e-64b7-48e6-aa4a-90ef6e06bf5a"),
+                            Pages = 448,
+                            Title = "The Hunger games"
+                        },
+                        new
+                        {
+                            Id = new Guid("9643bf5b-38a8-492f-91fd-037716991933"),
+                            AuthorId = new Guid("4b405a5b-9652-4213-8068-85639e99cfe1"),
+                            GenreId = new Guid("93c5439e-64b7-48e6-aa4a-90ef6e06bf5a"),
+                            Pages = 517,
+                            Title = "The ballad of songbirds and snakes"
+                        },
+                        new
+                        {
+                            Id = new Guid("b099fa16-8df5-4905-b3db-d78a9ef28108"),
+                            AuthorId = new Guid("d35450ed-c943-48c5-88ed-ab8a9f5eb064"),
+                            GenreId = new Guid("79df8d8a-6956-4682-9361-78a654c1320c"),
+                            Pages = 0,
+                            Title = "Harry potter and the philosphers stone"
+                        },
+                        new
+                        {
+                            Id = new Guid("5bac0c2c-989e-450b-b5e8-f01926dee6a4"),
+                            AuthorId = new Guid("d35450ed-c943-48c5-88ed-ab8a9f5eb064"),
+                            GenreId = new Guid("79df8d8a-6956-4682-9361-78a654c1320c"),
+                            Pages = 336,
+                            Title = "Harry Potter and the Cursed Child is a 2016 British two-part play written by Jack Thorne based on an original story by J. K. Rowling, John Tiffany, and Thorne. Previews of the play began at the Palace Theatre, London, on 7 June 2016, and it premiered on 30 July 2016"
+                        },
+                        new
+                        {
+                            Id = new Guid("d8ba669b-9ab6-4148-b0f3-35c8e51f7cd0"),
+                            AuthorId = new Guid("e29fcc24-13ad-4fb0-a782-6edd85f2fa3e"),
+                            GenreId = new Guid("79df8d8a-6956-4682-9361-78a654c1320c"),
+                            Pages = 485,
+                            Title = "City of Bones"
+                        });
                 });
 
             modelBuilder.Entity("LibraryManagement.Models.BookHistory", b =>
@@ -134,6 +194,45 @@ namespace LibraryManagement.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("BookHistories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("50d4ca07-d63f-4954-b076-1eecb9a1d6be"),
+                            BookId = new Guid("74fdbfa6-4196-4804-9d10-840f41031781"),
+                            LoanedAt = new DateTime(2022, 6, 23, 12, 29, 44, 332, DateTimeKind.Local).AddTicks(7815),
+                            ReturnedAt = new DateTime(2022, 7, 10, 12, 29, 44, 332, DateTimeKind.Local).AddTicks(7824),
+                            UserId = new Guid("16dd018e-b199-4355-9ae1-18ab5556ad4f")
+                        },
+                        new
+                        {
+                            Id = new Guid("b3a9ac4b-6cc8-47ec-8e85-796ad3a48920"),
+                            BookId = new Guid("112e8576-01a6-4105-af3e-f3ef5453b638"),
+                            LoanedAt = new DateTime(2022, 6, 23, 12, 29, 44, 332, DateTimeKind.Local).AddTicks(7860),
+                            UserId = new Guid("16dd018e-b199-4355-9ae1-18ab5556ad4f")
+                        },
+                        new
+                        {
+                            Id = new Guid("9f5fe3fa-6994-4020-b307-5d2b47b4a7e1"),
+                            BookId = new Guid("5bac0c2c-989e-450b-b5e8-f01926dee6a4"),
+                            LoanedAt = new DateTime(2022, 7, 9, 12, 29, 44, 332, DateTimeKind.Local).AddTicks(7878),
+                            UserId = new Guid("16dd018e-b199-4355-9ae1-18ab5556ad4f")
+                        },
+                        new
+                        {
+                            Id = new Guid("26033fee-51ad-4a2d-954c-94c3eceeb8ff"),
+                            BookId = new Guid("112e8576-01a6-4105-af3e-f3ef5453b638"),
+                            LoanedAt = new DateTime(2022, 5, 29, 12, 29, 44, 332, DateTimeKind.Local).AddTicks(7896),
+                            ReturnedAt = new DateTime(2022, 6, 17, 12, 29, 44, 332, DateTimeKind.Local).AddTicks(7903),
+                            UserId = new Guid("98b4cfd2-303e-4364-a9dc-c5c58ccc7237")
+                        },
+                        new
+                        {
+                            Id = new Guid("955f9f8e-bc5b-44db-9f9a-72665cc1e5fb"),
+                            BookId = new Guid("d8ba669b-9ab6-4148-b0f3-35c8e51f7cd0"),
+                            LoanedAt = new DateTime(2022, 6, 17, 12, 29, 44, 332, DateTimeKind.Local).AddTicks(7921),
+                            UserId = new Guid("98b4cfd2-303e-4364-a9dc-c5c58ccc7237")
+                        });
                 });
 
             modelBuilder.Entity("LibraryManagement.Models.Genre", b =>
@@ -160,19 +259,19 @@ namespace LibraryManagement.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9de0e16e-b445-4445-8780-d00857ce5082"),
+                            Id = new Guid("45dfbab4-60df-4037-ba97-2f6088719cca"),
                             Description = "Sience fiction",
                             Name = "SCI-FI"
                         },
                         new
                         {
-                            Id = new Guid("c71e16b2-560f-44fc-9c36-7bfb3bdb2f22"),
+                            Id = new Guid("79df8d8a-6956-4682-9361-78a654c1320c"),
                             Description = "Dragons, mythical quests.",
                             Name = "Fantasy"
                         },
                         new
                         {
-                            Id = new Guid("794f76f3-536c-4381-986c-1ae87a2ec20f"),
+                            Id = new Guid("93c5439e-64b7-48e6-aa4a-90ef6e06bf5a"),
                             Name = "Dystopian"
                         });
                 });
@@ -183,10 +282,6 @@ namespace LibraryManagement.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("FirstName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -195,10 +290,6 @@ namespace LibraryManagement.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
@@ -210,20 +301,16 @@ namespace LibraryManagement.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("83868201-1fd0-488f-9b1f-f239f19ba124"),
-                            Email = "dustinjoosen2003@gmail.com",
+                            Id = new Guid("16dd018e-b199-4355-9ae1-18ab5556ad4f"),
                             FirstName = "Dustin",
                             LastName = "Joosen",
-                            Password = "Password123",
                             Role = 1
                         },
                         new
                         {
-                            Id = new Guid("30ba8b2b-100b-4d42-9cc0-84ad7fb5797a"),
-                            Email = "kycoven@gmail.com",
+                            Id = new Guid("98b4cfd2-303e-4364-a9dc-c5c58ccc7237"),
                             FirstName = "Ky",
                             LastName = "Coven",
-                            Password = "Password123",
                             Role = 0
                         });
                 });

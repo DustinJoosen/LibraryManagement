@@ -1,4 +1,10 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(document).ready(function () {
+    $(".book").on("click", function () {
+        var guid = $(this).attr("value");
+        document.location.href = "/" + guid
+    })
+})
 
-// Write your JavaScript code.
+function SetRole(role) {
+    document.location.href = "/account/setrole?role=" + role;
+}

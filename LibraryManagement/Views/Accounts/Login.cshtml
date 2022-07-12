@@ -1,0 +1,19 @@
+﻿@model AuthDto
+
+<div class="mt-5">
+    <h3 class="text-center mb-4">Login</h3>
+    <form action="Login" method="post" class="login-form">
+        <div asp-validation-summary="ModelOnly" class="text-white"></div>
+        <div class="login-form-field">
+            <label>Email</label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email" class="text-white"></span>
+        </div>
+        <div class="login-form-field">
+            <label>Password</label>
+            <input asp-for="Password" type="password" />
+            <span asp-validation-for="Password" class="text-white"></span>
+        </div>
+        <input type="submit" value="login"/>
+    </form>
+</div>
