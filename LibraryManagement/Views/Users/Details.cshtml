@@ -1,10 +1,10 @@
 ﻿@model LibraryManagement.Models.User
 
 @{
-    ViewData["Title"] = "User Details";
+    ViewData["Title"] = "Customer Details";
 }
 
-<h3>Details of user</h3>
+<h3>Details of customer</h3>
 
 <div>
     <hr />
@@ -36,31 +36,36 @@
     </dl>
 </div>
 
-<h3>History</h3>
-<table class="table col-3">
-    <thead>
-        <th>Book</th>
-        <th>Loaned on</th>
-        <th>Returned on</th>
-    </thead>
-    @foreach(var bookhistory in Model.BookHistories.OrderBy(b => b.ReturnedAt != null).ThenByDescending(b => b.LoanedAt))
-    {
-        <tr>
-            <td>@bookhistory.Book.Title</td>
-            <td>@bookhistory.LoanedAt.ToString("dd-MM-yyyy")</td>
-            @if (Convert.ToDateTime(bookhistory.ReturnedAt) != DateTime.MinValue)
-            {
-                <td>@Convert.ToDateTime(bookhistory.ReturnedAt).ToString("dd-MM-yyyy")</td>
-            }
-            else
-            {
-                <td>-</td>
-            }
-        </tr>
-    }
-</table>
+@if (Model.BookHistories.Any())
+{
+    <h3>History</h3>
+    <table class="table col-3">
+        <thead>
+            <tr>
+                <th>Book</th>
+                <th>Loaned on</th>
+                <th>Returned on</th>
+            </tr>
+        </thead>
+        @foreach(var bookhistory in Model.BookHistories.OrderBy(b => b.ReturnedAt != null).ThenByDescending(b => b.LoanedAt))
+        {
+            <tr>
+                <td>@bookhistory.Book.Title</td>
+                <td>@bookhistory.LoanedAt.ToString("dd-MM-yyyy")</td>
+                @if (Convert.ToDateTime(bookhistory.ReturnedAt) != DateTime.MinValue)
+                {
+                    <td>@Convert.ToDateTime(bookhistory.ReturnedAt).ToString("dd-MM-yyyy")</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+            </tr>
+        }
+    </table>
 
+}
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to Users</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    <a class="btn btn-secondary" asp-action="Index">Back to customers</a>
 </div>

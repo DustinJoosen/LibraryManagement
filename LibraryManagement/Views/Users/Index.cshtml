@@ -1,31 +1,25 @@
 ﻿@model IEnumerable<LibraryManagement.Models.User>
 
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = "Customers management";
 }
 
-<h3>Users</h3>
+<h3>Customers</h3>
 
 <p>
-    <a asp-action="Create">Add New User</a>
+    <a asp-action="Create" class="btn btn-primary">Add customer</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.FullName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
              <th>
                  Currently borrowed books
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
             </th>
             <th></th>
         </tr>
@@ -34,10 +28,7 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
@@ -46,12 +37,9 @@
                 @(item.BookHistories.Where(history => history.ReturnedAt == null).Count())
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
     }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LibraryManagement;
 using LibraryManagement.Models;
 using Microsoft.AspNetCore.Authorization;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace LibraryManagement.Controllers
 {
@@ -16,10 +17,12 @@ namespace LibraryManagement.Controllers
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly INotyfService _notyf;
 
-        public UsersController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         // GET: Users
@@ -65,20 +68,17 @@ namespace LibraryManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,Email")] User user)
+        public async Task<IActionResult> Create([Bind("FirstName,LastName,Email,Password")] User user)
         {
             user.Id = Guid.NewGuid();
             user.Role = UserRole.Customer;
-            user.Password = "Password123!";
-
-            // Don't want any errors on bookhistories.
-            //ModelState.Remove("BookHistories");
 
             if (ModelState.IsValid)
             {
                 _context.Add(user);
                 await _context.SaveChangesAsync();
 
+                _notyf.Information("Successfully added customer");
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -118,6 +118,8 @@ namespace LibraryManagement.Controllers
                 {
                     _context.Update(user);
                     await _context.SaveChangesAsync();
+
+                    _notyf.Information("Successfully updated customer");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -169,6 +171,8 @@ namespace LibraryManagement.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            _notyf.Information("Successfully deleted customer");
             return RedirectToAction(nameof(Index));
         }
 

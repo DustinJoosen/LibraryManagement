@@ -1,4 +1,5 @@
-﻿using LibraryManagement.Dtos;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using LibraryManagement.Dtos;
 using LibraryManagement.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -12,9 +13,11 @@ namespace LibraryManagement.Controllers
     public class AccountsController : Controller
     {
         private ApplicationDbContext _context;
-        public AccountsController(ApplicationDbContext context)
+        private INotyfService _notyf;
+        public AccountsController(ApplicationDbContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         public IActionResult Login()
@@ -50,12 +53,15 @@ namespace LibraryManagement.Controllers
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             });
 
+            _notyf.Information($"Successfully signed in. Welcome {user.FullName}");
             return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
+
+            _notyf.Information("Successfully logged out");
             return RedirectToAction("Index", "Home");
         }
 

@@ -16,11 +16,23 @@ namespace LibraryManagement.Models
         public string Password { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "First name")]
         public string? FirstName { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Last name")]
         public string LastName { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Full name")]
+        public string FullName 
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
 
         [Required]
         public UserRole Role { get; set; } = UserRole.Customer;
