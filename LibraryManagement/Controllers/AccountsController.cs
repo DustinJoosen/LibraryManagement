@@ -65,6 +65,40 @@ namespace LibraryManagement.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public async Task<IActionResult> Settings()
+        {
+            if (User.Identity.Name == null)
+            {
+                return RedirectToAction(nameof(AccessDenied));
+            }
+
+            var userid = Guid.Parse(User.Identity.Name);
+            var user = await _context.Users
+                .SingleOrDefaultAsync(u => u.Id == userid);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Settings([Bind("Id,Email,Password,FirstName,LastName")] User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            _notyf.Information("Account settings updated");
+            return RedirectToAction("Index", "Home");
+        }
+
         public async Task<IActionResult> SetRole(UserRole role)
         {
             await SignIn(new List<Claim>
@@ -91,7 +125,6 @@ namespace LibraryManagement.Controllers
             };
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
-
         }
 
     }

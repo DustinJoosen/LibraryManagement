@@ -27,8 +27,13 @@ body {
     position: absolute;
 }
 
-.account-nav-link {
+.account-nav-link-login,
+.account-nav-link-logout {
     right: 30px;
+}
+
+.account-nav-link-settings {
+    right: 100px;
 }
 
 .login-form {
