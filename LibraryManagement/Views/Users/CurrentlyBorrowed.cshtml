@@ -1,0 +1,45 @@
+﻿@model User
+
+<h3>@Model.FullName</h3>
+<hr/>
+
+<div class="row">
+    <div class="col-4 currently-borrowed-books">
+        <h5>Currently borrowed</h5>
+        <table class="table table-bordered">
+            <tr>
+                <th colspan="2" class="text-center">Book</th>
+                <th>Loaned at</th>
+            </tr>
+            @foreach (var bookhistory in Model.BookHistories.Where(b => b.ReturnedAt == null)) {
+                <tr>
+                    <td class="text-center">
+                        <img src="/img/books/@bookhistory.Book.CoverImage" width="100" />
+                    </td>
+                    <td>@bookhistory.Book.Title</td>
+                    <td>@bookhistory.LoanedAt.ToShortDateString()</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-5 returned-books">
+        <h5>Returned</h5>
+        <table class="table table-bordered">
+            <tr>
+                <th colspan="2" class="text-center">Book</th>
+                <th>Loaned at</th>
+                <th>Returned at</th>
+            </tr>
+            @foreach (var bookhistory in Model.BookHistories.Where(b => b.ReturnedAt != null)) {
+                <tr>
+                    <td class="text-center">
+                        <img src="/img/books/@bookhistory.Book.CoverImage" width="100" />
+                    </td>
+                    <td>@bookhistory.Book.Title</td>
+                    <td>@bookhistory.LoanedAt.ToShortDateString()</td>
+                    <td>@Convert.ToDateTime(bookhistory.ReturnedAt).ToShortDateString()</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

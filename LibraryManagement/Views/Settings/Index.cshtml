@@ -1,0 +1,20 @@
+﻿@model SettingsObject
+
+<h3>Settings</h3>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <form asp-action="Settings">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaxBooksPerCustomer" class="control-label"></label>
+                <input asp-for="MaxBooksPerCustomer" class="form-control" />
+                <span asp-validation-for="MaxBooksPerCustomer" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

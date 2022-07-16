@@ -176,6 +176,28 @@ namespace LibraryManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> CurrentlyBorrowed()
+        {
+            if (User.Identity.Name == null)
+            {
+                return RedirectToAction("accessdenied", "accounts");
+            }
+
+            var userid = Guid.Parse(User.Identity.Name);
+            var user = await _context.Users
+                .Include(u => u.BookHistories)
+                .ThenInclude(b => b.Book)
+                .SingleOrDefaultAsync(u => u.Id == userid);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            return View(user);
+        }
+
         private bool UserExists(Guid id)
         {
           return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();

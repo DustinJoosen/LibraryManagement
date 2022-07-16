@@ -24,13 +24,21 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Books" asp-action="Index">Books management</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Settings" asp-action="Index">App settings</a>
+                            </li>
                         }
-
+                        else if (User.IsInRole(UserRole.Customer.ToString()))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="CurrentlyBorrowed">Borrowed</a>
+                            </li>
+                        }
 
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item account-nav-link account-nav-link-settings">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Settings">Settings</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Settings">Account Settings</a>
                             </li>
                             <li class="nav-item account-nav-link account-nav-link-logout">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
